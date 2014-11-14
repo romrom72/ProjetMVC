@@ -59,8 +59,9 @@ public class eleveDAO extends DAO<Eleve>
                     	ResultSet.TYPE_SCROLL_INSENSITIVE, 
                         ResultSet.CONCUR_UPDATABLE
                      ).executeUpdate(
-                    	"UPDATE \"mvc\".\"Eleve\" SET nom = '" + obj.getNom() + "', prenom = '" + obj.getPrenom() + "', dateNaiss = '" + obj.getDateNaiss() + "', codeDivision = '" + obj.getDiv() +
-                    	" WHERE codeEleve = '" + obj.getCode()+"'"
+                    		 "UPDATE \"mvc\".\"Eleve\" SET nom = '" + obj.getNom() +"', prenom = '"+obj.getPrenom()+"', \"dateNaiss\" = '"+obj.getDateNaiss()+"', \"codeDivision\" ="+obj.getDiv().getCode()
+                    		 + " WHERE \"codeEleve\" = "+obj.getCode()+""
+                    	
                      );
 			
 			obj = this.read(obj.getCode());

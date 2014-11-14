@@ -55,7 +55,7 @@ public class DivisionDAO extends DAO<Division>
 		                        ResultSet.CONCUR_UPDATABLE
 		                     ).executeUpdate(
 		                    	"UPDATE \"mvc\".\"Division\" SET libelle = '" + obj.getlibelle() + "'"+
-		                    	" WHERE code = '" + obj.getCode()+"'"
+		                    	" WHERE \"codeDivision\" = '" + obj.getCode()+"'"
 		                     );
 					
 					obj = this.read(obj.getCode());
