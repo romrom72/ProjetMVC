@@ -5,10 +5,11 @@ public class Eleve {
 		/**
 		 * @param args
 		 */
-		private int codeEleve;
+		private int code;
 		private String nom;
 		private String prenom;
 		private String dateNaiss;
+		private Division div;
 
 		//Accesseurs
 
@@ -16,9 +17,9 @@ public class Eleve {
 		* Accesseur du cu code d'un élève
 		* @return le code d'un élève
 		*/
-				public int getCodeEleve()
+				public int getCode()
 				{
-					return codeEleve;
+					return code;
 				}
 		/**
 		* Accesseur pour le nom de l'élève
@@ -45,16 +46,24 @@ public class Eleve {
 				{
 					return dateNaiss;
 				}
-
+		/**
+		* Accesseur du cu code d'un élève
+		* @return le code d'un élève
+		*/
+				public Division getDiv()
+				{
+					return div;
+				}
+				
 		//Modifieurs
 
 		/**
 		 * 
 		 * @param codeEleve
 		 */
-				public void setCode(int codeEleve)
+				public void setCode(int code)
 				{
-					this.codeEleve = codeEleve;
+					this.code = code;
 				}
 		
 		/**
@@ -82,7 +91,14 @@ public class Eleve {
 					this.dateNaiss = dateNaiss;
 				}
 				
-			
+		/**
+		* 
+		* @param codeEleve
+	    */
+				public void setDiv(Division div)
+				{
+					this.div = div;
+				}
 		// Constructeurs
 				
 		/**
@@ -92,10 +108,11 @@ public class Eleve {
 				
 				public Eleve()
 				{
-						codeEleve = 1;
+						code = 1;
 						nom = "Locquet";
 						prenom = "Romain";
 						dateNaiss = "12/03/1994";
+						div = new Division();
 				}
 		
 		/**
@@ -105,12 +122,13 @@ public class Eleve {
 		 * @param prenom
 		 * @param dateNaiss
 		 */
-				public Eleve(int codeEleve, String nom, String prenom, String dateNaiss)
+				public Eleve(int code, String nom, String prenom, String dateNaiss, Division div)
 				{
-					this.codeEleve = codeEleve;
+					this.code = code;
 					this.nom = nom;
 					this.prenom = prenom;
 					this.dateNaiss = dateNaiss;
+					this.div = div;
 				}
 		
 		
@@ -118,7 +136,7 @@ public class Eleve {
 		
 		public String toString()
 		{
-			return("Le code de l'éleve est "+codeEleve+", son nom et prenom : " + nom + " " +prenom + ", né le "+ dateNaiss+ ".");
+			return("Le code de l'éleve est "+code+", son nom et prenom : " + nom + " " +prenom + ", né le "+ dateNaiss+ ".");
 		}
 		
 }

@@ -3,7 +3,7 @@ import java.sql.Connection;
 
 public abstract class DAO<T>
 {
-	public static Connection connect ;
+	public Connection connect = ConnexionPostgreSQL.getInstance() ;
 
 	public abstract T create (T obj);
 	
