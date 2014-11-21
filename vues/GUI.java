@@ -2,6 +2,7 @@ package vues;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,10 +11,24 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import controleurs.ControleurPP;
+import classes.Division;
+import dao.DAO;
+import dao.DivisionDAO;
+
 public class GUI extends JFrame {
 
 	private JPanel contentPane;
-
+	private JMenuBar menuBar;
+	private JMenu mnDivision;
+	private JMenuItem mntmVisualiser;
+	private JMenuItem mntmModifier;
+	private JMenuItem mntmAjouter;
+	private JMenuItem mntmSupprimer;
+	private JMenu mnElves;
+	private JMenu mnFermer;
+	
+	private ControleurPP leControleur = new ControleurPP();
 	/**
 	 * Launch the application.
 	 */
@@ -38,28 +53,37 @@ public class GUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnDivision = new JMenu("Division");
+		mnDivision = new JMenu("Division");
 		menuBar.add(mnDivision);
 		
-		JMenuItem mntmVisualiser = new JMenuItem("Visualiser");
+		mntmVisualiser = new JMenuItem("Visualiser");
 		mnDivision.add(mntmVisualiser);
 		
-		JMenuItem mntmModifier = new JMenuItem("Modifier");
+		mntmModifier = new JMenuItem("Modifier");
 		mnDivision.add(mntmModifier);
 		
-		JMenuItem mntmAjouter = new JMenuItem("Ajouter");
+		mntmAjouter = new JMenuItem("Ajouter");
 		mnDivision.add(mntmAjouter);
 		
-		JMenuItem mntmSupprimer = new JMenuItem("Supprimer");
+		mntmSupprimer = new JMenuItem("Supprimer");
 		mnDivision.add(mntmSupprimer);
 		
-		JMenu mnElves = new JMenu("Elèves");
+		mnElves = new JMenu("Elèves");
 		menuBar.add(mnElves);
 		
-		JMenu mnFermer = new JMenu("Fermer");
+		DAO<Division> daoDiv = new DivisionDAO();
+		List<Division> lesDiv = daoDiv.readAll();
+		for (Division uneDiv : lesDiv ) {
+			JMenuItem mnUneDivEleve = new JMenuItem(uneDiv.getlibelle());
+			mnUneDivEleve.setActionCommand(Integer.toString(uneDiv.getCode()));
+			mnUneDivEleve.addActionListener(leControleur);
+			mnElves.add(mnUneDivEleve);
+		}
+		
+		mnFermer = new JMenu("Fermer");
 		menuBar.add(mnFermer);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
