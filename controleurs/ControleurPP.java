@@ -34,6 +34,12 @@ public class ControleurPP implements ActionListener
 		{
 			System.exit(0);
 		}
+		
+		else if (e.getSource() == vue.mntmVisualiser) 
+		{
+			vue.GUIEleve.setVisible(true);
+			vue.contentPane.add(vue.GUIEleve);
+		}
 	}
 }
 	

@@ -18,15 +18,18 @@ import dao.DivisionDAO;
 
 public class GUI extends JFrame {
 
-	private JPanel contentPane;
+	public final JPanel contentPane;
 	private JMenuBar menuBar;
 	private JMenu mnDivision;
-	private JMenuItem mntmVisualiser;
+	public JMenuItem mntmVisualiser;
 	private JMenuItem mntmModifier;
 	private JMenuItem mntmAjouter;
 	private JMenuItem mntmSupprimer;
 	private JMenu mnElves;
-	public final JMenu mnFermer;
+	public final JMenuItem mnFermer;
+	public JMenuItem mnUneDivEleve;
+	
+	public GUIEleve GUIEleve;
 	
 	private ControleurPP leControleur = new ControleurPP(null,null);
 		/**
@@ -37,6 +40,18 @@ public class GUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
+		GUIEleve = new GUIEleve(leControleur);
+		contentPane.add(GUIEleve);
+		GUIEleve.setVisible(false);
+		
+		
+		
+		
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -46,6 +61,7 @@ public class GUI extends JFrame {
 		
 		mntmVisualiser = new JMenuItem("Visualiser");
 		mnDivision.add(mntmVisualiser);
+		mntmVisualiser.addActionListener(leControleur);
 		
 		mntmModifier = new JMenuItem("Modifier");
 		mnDivision.add(mntmModifier);
@@ -62,23 +78,16 @@ public class GUI extends JFrame {
 		DAO<Division> daoDiv = new DivisionDAO();
 		List<Division> lesDiv = daoDiv.readAll();
 		for (Division uneDiv : lesDiv ) {
-			JMenuItem mnUneDivEleve = new JMenuItem(uneDiv.getlibelle());
+			mnUneDivEleve = new JMenuItem(uneDiv.getlibelle());
 			mnUneDivEleve.setActionCommand(Integer.toString(uneDiv.getCode()));
 			mnUneDivEleve.addActionListener(leControleur);
 			mnElves.add(mnUneDivEleve);
 		}
 		
-		mnFermer = new JMenu("Fermer");
+		mnFermer = new JMenuItem("Fermer");
 		menuBar.add(mnFermer);
 	    mnFermer.addActionListener(leControleur);
-	    
-	    
-	    
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
+
 		setVisible(true);
 	}
 

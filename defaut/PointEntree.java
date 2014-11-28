@@ -25,7 +25,7 @@ public class PointEntree {
 			DAO<Division> modeleDivision = new DivisionDAO();
 			DAO<Eleve> modeleEleve = new eleveDAO();
 			ControleurPP leControleur = new ControleurPP(modeleDivision,modeleEleve);
-			GUI interfaceGraph = new GUI(leControleur);
+			GUI interfaceG = new GUI(leControleur);
 			leControleur.lienVue(interfaceG);
 			
 			// Méthode arrêtant la connexion en cours à la bdd
