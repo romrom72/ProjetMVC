@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-
+import defaut.PointEntree;
 import controleurs.ControleurPP;
 import classes.Division;
 import dao.DAO;
@@ -26,32 +26,17 @@ public class GUI extends JFrame {
 	private JMenuItem mntmAjouter;
 	private JMenuItem mntmSupprimer;
 	private JMenu mnElves;
-	private JMenu mnFermer;
+	public final JMenu mnFermer;
 	
-	private ControleurPP leControleur = new ControleurPP();
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
+	private ControleurPP leControleur = new ControleurPP(null,null);
+		/**
 	 * Create the frame.
 	 */
-	public GUI() {
+	public GUI(ControleurPP leControleur) {
 		setTitle("Mon ecole");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -85,10 +70,16 @@ public class GUI extends JFrame {
 		
 		mnFermer = new JMenu("Fermer");
 		menuBar.add(mnFermer);
+	    mnFermer.addActionListener(leControleur);
+	    
+	    
+	    
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		setVisible(true);
 	}
 
 }
